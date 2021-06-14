@@ -9,26 +9,24 @@ import {PersistanceService} from 'src/app/shared/serices/persistance.service';
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface';
 import {AuthService} from '../../services/auth.service';
 import {
-  registerAction,
-  registerFailureAction,
-  registerSuccessAction,
-} from '../actions/register.action';
+  loginAction,
+  loginFailureAction,
+  loginSuccessAction,
+} from '../actions/login.action';
 
 @Injectable()
-export class RegisterEffect {
-  register$ = createEffect(() =>
+export class LoginEffect {
+  login$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(registerAction),
+      ofType(loginAction),
       switchMap(({request}) => {
-        return this.authService.register(request).pipe(
+        return this.authService.login(request).pipe(
           map((currentUser: CurrentUserInterface) => {
             this.persistanceService.set('accessToken', currentUser.token);
-            return registerSuccessAction({currentUser});
+            return loginSuccessAction({currentUser});
           }),
           catchError((errorResponse: HttpErrorResponse) => {
-            return of(
-              registerFailureAction({errors: errorResponse.error.errors})
-            );
+            return of(loginFailureAction({errors: errorResponse.error.errors}));
           })
         );
       })
@@ -38,7 +36,7 @@ export class RegisterEffect {
   redirectAfterSubmit$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(registerSuccessAction),
+        ofType(loginSuccessAction),
         tap(() => {
           console.log('success');
           this.router.navigateByUrl('/');
