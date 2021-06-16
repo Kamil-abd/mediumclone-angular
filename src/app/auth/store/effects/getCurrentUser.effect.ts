@@ -1,8 +1,7 @@
-import {HttpErrorResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
-import {catchError, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 import {PersistanceService} from 'src/app/shared/serices/persistance.service';
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface';
@@ -27,7 +26,7 @@ export class GetCurrentUserEffect {
           map((currentUser: CurrentUserInterface) => {
             return getCurrentUserSuccessAction({currentUser});
           }),
-          catchError((errorResponse: HttpErrorResponse) => {
+          catchError(() => {
             return of(getCurrentUserFailureAction());
           })
         );

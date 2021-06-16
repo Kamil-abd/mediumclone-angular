@@ -23,7 +23,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private store: Store
+    private store: Store,
   ) {}
 
   ngOnInit(): void {
