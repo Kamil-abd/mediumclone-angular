@@ -1,4 +1,11 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {Observable, Subscription} from 'rxjs';
@@ -17,7 +24,7 @@ import {parseUrl, stringify} from 'query-string';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.scss'],
 })
-export class FeedComponent implements OnInit, OnDestroy {
+export class FeedComponent implements OnInit, OnDestroy, OnChanges {
   @Input('apiUrl') apiUrlProps: string;
 
   isLoading$: Observable<boolean>;
@@ -37,6 +44,15 @@ export class FeedComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initializeValues();
     this.initializeListeners();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    const isApiUrlChanged =
+      !changes.apiUrlProps.firstChange &&
+      changes.apiUrlProps.currentValue !== changes.apiUrlProps.previousValue;
+      if (isApiUrlChanged){
+        this.fetchFeed()
+      }
   }
 
   ngOnDestroy(): void {
@@ -63,12 +79,15 @@ export class FeedComponent implements OnInit, OnDestroy {
   fetchFeed() {
     const offset = this.currentPage * this.limit - this.limit;
     const parsedUrl = parseUrl(this.apiUrlProps);
+    console.log(parsedUrl);
     const stringifiedParams = stringify({
       limit: this.limit,
       offset,
       ...parsedUrl.query,
     });
+    console.log(stringifiedParams);
     const apiUrlWithParams = `${parsedUrl.url}?${stringifiedParams}`;
+    console.log(apiUrlWithParams);
     this.store.dispatch(getFeedAction({url: apiUrlWithParams}));
   }
 }

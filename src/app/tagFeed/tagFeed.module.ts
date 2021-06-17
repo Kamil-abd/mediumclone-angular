@@ -3,14 +3,14 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {BannerModule} from '../shared/modules/banner/banner.module';
 import {FeedModule} from '../shared/modules/feed/feed.module';
-import { FeedToglerModule } from '../shared/modules/feedToggler/feedTogler.module';
-import { PopularTagsModule } from '../shared/modules/popularTags/popularTags.module';
-import {GlobalFeedComponent} from './components/globalFeed/globalFeed.component';
+import {FeedToglerModule} from '../shared/modules/feedToggler/feedTogler.module';
+import {PopularTagsModule} from '../shared/modules/popularTags/popularTags.module';
+import {TagFeedComponent} from './components/tagFeed/tagFeed.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: GlobalFeedComponent,
+    path: 'tags/:slug',
+    component: TagFeedComponent,
   },
 ];
 
@@ -21,8 +21,8 @@ const routes: Routes = [
     FeedModule,
     BannerModule,
     PopularTagsModule,
-    FeedToglerModule
+    FeedToglerModule,
   ],
-  declarations: [GlobalFeedComponent],
+  declarations: [TagFeedComponent],
 })
-export class GlobalFeedModule {}
+export class TagFeedModule {}
