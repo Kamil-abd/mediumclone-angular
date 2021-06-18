@@ -1,0 +1,34 @@
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {EffectsModule} from '@ngrx/effects';
+import {StoreModule} from '@ngrx/store';
+import {ArticleFormModule} from '../shared/modules/articleForm/articleForm.module';
+import { LoadingModule } from '../shared/modules/loading/loading.module';
+import {ArticleService as SharedArticleService} from '../shared/serices/article.service';
+import {EditArticleComponent} from './components/editArticle/editArticle.component';
+import {EditArticlService} from './services/editArticle.service';
+import {GetArticleEffect} from './store/effects/editArticle.effect';
+import {UpdateArticleEffect} from './store/effects/getArticle.effect copy';
+import {reducers} from './store/reducers';
+
+const routes = [
+  {
+    path: 'articles/:slug/edit',
+    component: EditArticleComponent,
+  },
+];
+
+@NgModule({
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    ArticleFormModule,
+    LoadingModule,
+    EffectsModule.forFeature([GetArticleEffect, UpdateArticleEffect]),
+    StoreModule.forFeature('editArticle', reducers),
+  ],
+  declarations: [EditArticleComponent],
+  providers: [EditArticlService, SharedArticleService],
+})
+export class EditArticleModule {}
