@@ -6,7 +6,7 @@ import {StoreModule} from '@ngrx/store';
 import {ErrorMessageModule} from '../shared/modules/errorMessage/errorMessage.module';
 import {LoadingModule} from '../shared/modules/loading/loading.module';
 import {TagListModule} from '../shared/modules/tagList/tagList.module';
-import {ArticleService as SharedArticleService} from '../shared/serices/article.service';
+import {ArticleService as SharedArticleService} from '../shared/services/article.service';
 import {ArticleComponent} from './component/article/article.component';
 import {ArticleService} from './service/article.service';
 import {DeleteArticleEffect} from './store/effects/deleteArticle.effect';

@@ -10,8 +10,8 @@ import {environment} from 'src/environments/environment';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { EffectsModule } from '@ngrx/effects';
 import { TopBarModule } from './shared/modules/topBar/topBar.module';
-import { PersistanceService } from './shared/serices/persistance.service';
-import { AuthInterceptor } from './shared/serices/authInterceptor.service';
+import { PersistanceService } from './shared/services/persistance.service';
+import { AuthInterceptor } from './shared/services/authInterceptor.service';
 import { GlobalFeedModule } from './globalFeed/globalFeed.module';
 import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { YourFeedModule } from './yourFeed/yourFeed.module';
@@ -19,6 +19,7 @@ import { TagFeedModule } from './tagFeed/tagFeed.module';
 import { ArticleModule } from './article/article.module';
 import { CreateArticleModule } from './createArticle/createArticle.module';
 import { EditArticleModule } from './editArticle/editArticle.module';
+import { SettingsModule } from './settings/settings.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { EditArticleModule } from './editArticle/editArticle.module';
     CreateArticleModule,
     ArticleModule,
     EditArticleModule,
+    SettingsModule,
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

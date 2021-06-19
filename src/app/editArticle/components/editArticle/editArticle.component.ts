@@ -3,7 +3,6 @@ import {ActivatedRoute} from '@angular/router';
 import {select, Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {filter, map} from 'rxjs/operators';
-import {createArticleAction} from 'src/app/createArticle/store/actions/createArticle.action';
 import {ArticleInputInterface} from 'src/app/shared/types/articleInput.interface';
 import {BackendErrorsInterface} from 'src/app/shared/types/backendErrors.interface';
 import { updateArticleAction } from '../../store/actions/editArticle.action';

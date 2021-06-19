@@ -3,7 +3,7 @@ import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {of} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 
-import {PersistanceService} from 'src/app/shared/serices/persistance.service';
+import {PersistanceService} from 'src/app/shared/services/persistance.service';
 import {CurrentUserInterface} from 'src/app/shared/types/currentUser.interface';
 import {AuthService} from '../../services/auth.service';
 import {

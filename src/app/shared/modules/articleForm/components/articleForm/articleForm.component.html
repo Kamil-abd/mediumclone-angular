@@ -2,10 +2,10 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
-        <ms-backend-error-messages
+        <mc-backend-error-messages
           *ngIf="errorsProps"
           [backendErrors]="errorsProps"
-        ></ms-backend-error-messages>
+        ></mc-backend-error-messages>
         <form [formGroup]="form" (ngSubmit)="onSubmit()">
           <fieldset>
             <fieldset class="form-group">
